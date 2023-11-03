@@ -24,7 +24,7 @@ ARG UID=1234
 ARG GID=1234
 RUN groupadd --gid ${GID} ${USERNAME} \
     && useradd --uid ${UID} --gid ${GID} -m -s /bin/bash ${USERNAME} \
-    && echo "${USERNAME} ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/${USERNAME} \
+    && echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} \
     && chmod 0440 /etc/sudoers.d/${USERNAME}
 
 USER ${USERNAME}

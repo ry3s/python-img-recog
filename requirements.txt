@@ -5,6 +5,7 @@ tqdm
 timm
 pycocotools
 pytorch_lightning>=2
+tensorboard
 
 ipykernel
 black

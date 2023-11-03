@@ -58,3 +58,23 @@ def generate_subset(dataset: Dataset, ratio: float, random_seed: int = 0):
 
     indices1, indices2 = indices[:size], indices[size:]
     return indices1, indices2
+
+def collate_fn(batch):
+    max_height = 0
+    max_width = 0
+    for img, _ in batch:
+        h, w = img.shape[1:]
+        max_height = max(max_height, h)
+        max_width = max(max_width, w)
+
+    height = (max_height + 31) // 32 * 32
+    width = (max_width + 31) // 32 * 32
+
+    imgs = batch[0][0].new_zeros((len(batch), 3, height, width))
+    targets = []
+    for i, (img, target) in enumerate(batch):
+        h, w = img.shape[1:]
+        imgs[i, :, :h, :w] = img
+        targets.append(target)
+
+    return imgs, targets

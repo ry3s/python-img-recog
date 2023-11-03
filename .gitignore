@@ -6,3 +6,4 @@ data/coco/val2014
 val2014.zip
 
 workdir
+lightning_logs
